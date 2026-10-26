@@ -1,0 +1,225 @@
+:root {
+  --paper: #f3ead7;
+  --paper-2: #ebe0c7;
+  --ink: #1f1c18;
+  --ink-soft: #5b5348;
+  --indigo: #1f3d73;
+  --indigo-soft: #dfe6f2;
+  --vermilion: #c0392b;
+  --vermilion-soft: #f6dfd9;
+  --line: #cdbf9f;
+  --cell: 52px;
+  --move-ms: 560ms;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: 'Noto Sans JP', 'Hiragino Kaku Gothic ProN', 'Yu Gothic', Meiryo, sans-serif;
+  line-height: 1.6;
+  background-image: radial-gradient(rgba(120, 100, 60, 0.06) 1px, transparent 1px);
+  background-size: 6px 6px;
+}
+h1, h2, h3, .logo, .big {
+  font-family: 'Shippori Mincho', 'Hiragino Mincho ProN', 'Yu Mincho', serif;
+  font-weight: 700;
+}
+.screen { max-width: 1180px; margin: 0 auto; padding: 20px 16px 40px; }
+.note { color: var(--ink-soft); font-size: 0.9rem; }
+.site-foot { text-align: center; color: var(--ink-soft); font-size: 0.75rem; padding: 12px; }
+
+/* ボタン */
+.btn {
+  font: inherit; cursor: pointer; padding: 8px 16px;
+  border: 1.5px solid var(--ink); background: #fffaf0; color: var(--ink); border-radius: 4px;
+}
+.btn:hover:not(:disabled) { background: #fff; }
+.btn:disabled { opacity: 0.45; cursor: not-allowed; }
+.btn.primary { background: var(--indigo); color: #fff; border-color: var(--indigo); }
+.btn.primary:hover:not(:disabled) { background: #28508f; }
+.btn.big { padding: 12px 24px; font-size: 1.05rem; }
+.btn.small { padding: 4px 10px; font-size: 0.85rem; }
+.btn.on { background: var(--ink); color: #fff; }
+.btn.pulse { animation: pulse 1.2s infinite; }
+@keyframes pulse { 50% { box-shadow: 0 0 0 6px rgba(31, 61, 115, 0.25); } }
+.row-buttons { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin: 14px 0; }
+
+/* タイトル */
+.title { text-align: center; padding-top: 48px; }
+.logo { font-size: clamp(2.2rem, 7vw, 4rem); letter-spacing: 0.12em; margin: 0; }
+.sub { color: var(--vermilion); font-family: 'Shippori Mincho', serif; font-size: 1.1rem; }
+.howto { text-align: left; display: inline-block; margin: 20px 0; padding-left: 1.4em; max-width: 640px; }
+.title-buttons { display: flex; flex-direction: column; gap: 10px; align-items: center; margin: 16px 0; }
+.title-buttons .btn { min-width: 320px; }
+
+/* 陣立て */
+.armies { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.army { background: rgba(255, 250, 240, 0.7); border: 1.5px solid var(--line); border-radius: 6px; padding: 12px 14px; }
+.army-W { border-top: 5px solid var(--indigo); }
+.army-E { border-top: 5px solid var(--vermilion); }
+.army h2 { margin: 0 0 8px; font-size: 1.15rem; }
+.slot-row { display: flex; gap: 8px; align-items: center; margin: 6px 0; }
+.slot-name { width: 3.4em; font-size: 0.9rem; }
+.slot-genus { flex: 1; padding: 5px; font: inherit; }
+.slot-genus.fixed { color: var(--ink-soft); }
+.owner { width: 7.5em; padding: 5px; font: inherit; }
+.budget { margin-top: 8px; font-weight: 500; }
+.budget.over { color: var(--vermilion); }
+.forecast { display: flex; flex-wrap: wrap; gap: 6px 10px; align-items: center; margin: 14px 0; }
+.forecast-title { font-weight: 700; }
+.fc { padding: 2px 10px; border-radius: 12px; font-size: 0.85rem; border: 1px solid var(--line); background: #fffaf0; }
+.fc.rain { background: #dce8f1; border-color: #8fb0c8; }
+.fc.sun { background: #fbefc9; border-color: #e1c872; }
+
+/* 作戦 */
+.plan-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 12px; margin: 12px 0; }
+.plan-card { background: rgba(255, 250, 240, 0.8); border: 1.5px solid var(--line); border-radius: 6px; padding: 10px 12px; }
+.plan-card.side-W { border-left: 5px solid var(--indigo); }
+.plan-card.side-E { border-left: 5px solid var(--vermilion); }
+.plan-card.sealed { background: #eef0e4; text-align: center; }
+.plan-head { margin-bottom: 6px; }
+.plan-card label { display: block; font-size: 0.82rem; color: var(--ink-soft); margin-top: 8px; }
+.plan-card textarea { width: 100%; font: inherit; padding: 6px; resize: vertical; }
+/* 封印：貼り付けた軍令はぼかして表示（中身は読めない） */
+.sealed-input { color: transparent; caret-color: var(--ink); text-shadow: 0 0 7px rgba(31, 28, 24, 0.55); }
+.seal { font-family: 'Shippori Mincho', serif; font-size: 1.15rem; margin: 8px 0; color: var(--indigo); border: 2px solid var(--vermilion); display: inline-block; padding: 2px 14px; transform: rotate(-2deg); }
+.status.bad { color: var(--vermilion); font-size: 0.85rem; margin: 6px 0; }
+.dev { margin: 12px 0; color: var(--ink-soft); font-size: 0.85rem; }
+
+/* 合戦 */
+.battle-head { display: flex; align-items: baseline; gap: 16px; flex-wrap: wrap; }
+.battle-head h1 { margin: 0; }
+.turn { font-weight: 700; font-size: 1.1rem; min-width: 8.5em; }
+.clock-bar { display: inline-block; width: 220px; height: 10px; background: rgba(31, 28, 24, 0.15); border-radius: 5px; overflow: hidden; vertical-align: middle; }
+.clock-bar i { display: block; height: 100%; width: 0; background: var(--indigo); transition: width 0.3s; }
+.clock-bar.sd i { background: var(--vermilion); }
+.weather.rain { color: #2c6a94; }
+.weather.sun { color: #b27b00; }
+.battle-main { display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: 16px; align-items: start; margin-top: 8px; }
+.board-col { min-width: 0; }
+.controls { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-top: 10px; }
+.speed { display: inline-flex; gap: 4px; margin-left: 8px; }
+.side-col h3 { margin: 8px 0 4px; font-size: 1rem; }
+.detail { min-height: 5.5em; background: rgba(255, 250, 240, 0.8); border: 1px solid var(--line); padding: 8px 10px; border-radius: 4px; font-size: 0.9rem; }
+.seal-line { color: var(--indigo); }
+.log { list-style: none; margin: 0; padding: 6px 10px; height: 240px; overflow-y: auto; background: #fffaf0; border: 1px solid var(--line); border-radius: 4px; font-size: 0.85rem; }
+.log li { padding: 2px 0; border-bottom: 1px dotted var(--line); }
+.log li.charge { color: var(--vermilion); font-weight: 700; }
+.log li.result { font-weight: 700; color: var(--indigo); }
+.log li.rout { color: #8a5a00; }
+
+/* 基本命令・追加命令 */
+.basic-row { display: flex; align-items: center; gap: 8px; margin-top: 6px; }
+.basic-row label { font-weight: 700; font-size: 0.9rem; }
+.basic-select { font: inherit; padding: 4px 6px; border: 1.5px solid var(--ink); border-radius: 4px; background: #fffaf0; }
+.note.small { font-size: 0.78rem; margin-top: 2px; }
+.extra-status { margin: 6px 0 2px; }
+.small-seal { font-size: 0.9rem; margin: 2px 0; padding: 0 8px; }
+details.extra > summary { cursor: pointer; color: var(--indigo); font-size: 0.88rem; margin: 4px 0; }
+.plan-card.has-extra { background: #f3f0e2; }
+details.plan-card.bulk > summary { cursor: pointer; }
+.rc-rules li.basic { background: #efe9d8; }
+.rc-rules li.basic .num { font-weight: 700; color: var(--ink-soft); }
+
+/* 早見表 */
+.guide { margin: 12px 0; background: #fffaf0; border: 2px solid var(--ink); border-radius: 6px; }
+.guide > summary { cursor: pointer; padding: 8px 12px; font-weight: 700; font-size: 1.05rem; }
+.guide-body { padding: 0 14px 12px; font-size: 0.9rem; }
+.guide-body h3 { margin: 14px 0 4px; font-size: 1rem; border-left: 4px solid var(--vermilion); padding-left: 6px; }
+.guide-body ul { margin: 4px 0; padding-left: 1.3em; }
+.guide-table { border-collapse: collapse; width: 100%; margin: 4px 0; }
+.guide-table th, .guide-table td { border: 1px solid var(--line); padding: 3px 6px; text-align: left; vertical-align: top; }
+.guide-table thead th { background: #efe5cc; font-size: 0.8rem; }
+.guide-table tbody th { white-space: nowrap; background: #f6eedb; }
+.guide-table .small, .guide-body .small { font-size: 0.8rem; }
+.guide-table .latin { font-style: italic; color: var(--ink-soft); }
+.guide-map-wrap { overflow-x: auto; }
+.guide-map { display: inline-grid; grid-template-columns: 18px repeat(16, 22px); grid-auto-rows: 20px; gap: 1px; margin-top: 8px; font-size: 0.65rem; }
+.gm-axis { display: flex; align-items: center; justify-content: center; color: var(--ink-soft); }
+.gm { display: flex; align-items: center; justify-content: center; background: #e2d6ad; font-family: 'Shippori Mincho', serif; }
+.gm.t-silva { background: #a9bf86; } .gm.t-collis { background: #d3b77d; } .gm.t-flumen { background: #8fb7cf; } .gm.t-pons { background: #b9915e; }
+.gm.zW { box-shadow: inset 0 -3px 0 rgba(43, 76, 155, 0.45); } .gm.zE { box-shadow: inset 0 -3px 0 rgba(192, 57, 43, 0.45); }
+.gm.base-W { background: var(--indigo); color: #fff; } .gm.base-E { background: var(--vermilion); color: #fff; }
+.sub-title { font-size: 1rem; margin: 14px 0 2px; }
+.bulk-list { grid-template-columns: 1fr 1fr; }
+.status.good { color: #2f7a3a; font-size: 0.85rem; margin: 6px 0; }
+@media (max-width: 800px) { .bulk-list { grid-template-columns: 1fr; } }
+
+/* 布陣 */
+.section-title { font-size: 1.15rem; margin: 18px 0 6px; border-bottom: 1px solid var(--line); }
+.deploy { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.deploy-panel { background: rgba(255, 250, 240, 0.8); border: 1.5px solid var(--line); border-radius: 6px; padding: 8px 12px; text-align: center; }
+.deploy-panel.side-W { border-left: 5px solid var(--indigo); }
+.deploy-panel.side-E { border-right: 5px solid var(--vermilion); }
+.deploy-panel h3 { margin: 2px 0 4px; }
+.deploy-grid { display: inline-grid; grid-template-columns: repeat(4, 34px); grid-auto-rows: 30px; gap: 2px; margin: 6px 0; }
+.dcell { position: relative; display: flex; align-items: center; justify-content: center; border-radius: 3px; cursor: pointer; background: #e2d6ad; }
+.dcell.t-silva { background: #a9bf86; }
+.dcell.t-collis { background: #d3b77d; }
+.dcell.t-pons { background: #b9915e; }
+.dcell.t-flumen, .dcell.no { background: #8fb7cf; cursor: not-allowed; }
+.dcell.base { box-shadow: inset 0 0 0 2px var(--ink); }
+.dcell:hover:not(.no) { outline: 2px solid #e0a800; }
+.dmark { font-size: 0.7rem; opacity: 0.5; font-family: 'Shippori Mincho', serif; }
+.dcell.item { background-image: repeating-linear-gradient(45deg, rgba(0,0,0,0.08) 0 4px, transparent 4px 8px); }
+.dcell.item-ishigaki { background-color: #b7b2a6; }
+.dcell.item-babosaku { background-color: #c9a46a; }
+.dcell.item-yagura { background-color: #a98552; }
+.dcell.item-sel { outline: 3px solid #e0a800; }
+.ditem { position: absolute; left: 2px; top: 0; font-size: 0.6rem; font-weight: 700; color: #3a2a14; }
+.dtoken { width: 26px; height: 26px; border-radius: 50%; color: #fff; display: flex; align-items: center; justify-content: center; font-family: 'Shippori Mincho', serif; font-weight: 700; font-size: 0.9rem; }
+.dtoken.W { background: var(--indigo); }
+.dtoken.E { background: var(--vermilion); }
+.dtoken.sel { outline: 3px solid #e0a800; outline-offset: 1px; transform: scale(1.12); }
+@media (max-width: 700px) { .deploy { grid-template-columns: 1fr; } }
+
+/* 盤面（Canvas に描く） */
+.board-host { width: 100%; }
+.board-wrap { position: relative; width: 100%; }
+.board-canvas { display: block; border-radius: 6px; box-shadow: 0 2px 10px rgba(40, 25, 5, 0.25); cursor: pointer; }
+.board-toggle { position: absolute; right: 8px; top: 8px; opacity: 0.85; }
+.board-toggle.on { background: var(--ink); color: #fff; }
+
+/* 戦果・戦況レポート */
+.reports { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 12px 0; }
+.report { background: rgba(255, 250, 240, 0.9); border: 1.5px solid var(--line); border-radius: 6px; padding: 8px 12px; }
+.report.side-W { border-left: 5px solid var(--indigo); }
+.report.side-E { border-left: 5px solid var(--vermilion); }
+.report > summary { cursor: pointer; padding: 4px 0; }
+.report-text { white-space: pre-wrap; word-break: break-word; font-size: 0.78rem; max-height: 420px; overflow: auto; background: #fffdf7; border: 1px solid var(--line); padding: 8px; }
+@media (max-width: 800px) { .reports { grid-template-columns: 1fr; } }
+
+/* 種明かし */
+.result-banner { text-align: center; padding: 14px; border: 2px solid var(--ink); border-radius: 6px; background: #fffaf0; margin: 10px 0; }
+.result-banner.W { border-color: var(--indigo); }
+.result-banner.E { border-color: var(--vermilion); }
+.result-banner .big { font-size: 2rem; }
+.reveal-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(380px, 1fr)); gap: 12px; }
+.reveal-card { background: rgba(255, 250, 240, 0.85); border: 1.5px solid var(--line); border-radius: 6px; padding: 10px 12px; }
+.reveal-card.side-W { border-left: 5px solid var(--indigo); }
+.reveal-card.side-E { border-left: 5px solid var(--vermilion); }
+.rc-head { display: flex; justify-content: space-between; gap: 8px; flex-wrap: wrap; }
+.rc-score { font-size: 0.82rem; color: var(--ink-soft); }
+.rc-said { margin: 6px 0; }
+.rc-label { font-size: 0.82rem; color: var(--ink-soft); }
+.rc-rules { margin: 2px 0 6px; padding-left: 0; list-style: none; }
+.rc-rules li { display: flex; gap: 8px; padding: 3px 4px; border-bottom: 1px dotted var(--line); }
+.rc-rules .num { width: 1.4em; }
+.rc-rules .jp { flex: 1; }
+.rc-rules .cnt { white-space: nowrap; font-size: 0.85rem; color: var(--ink-soft); }
+.rc-rules li.zero { background: #fde7d8; }
+.rc-rules li.zero .cnt { color: var(--vermilion); font-weight: 700; }
+.rc-default { font-size: 0.85rem; color: var(--ink-soft); }
+.nota-text { font-style: italic; margin: 2px 0 4px; word-break: break-word; }
+
+@media (max-width: 1000px) {
+  :root { --cell: 40px; }
+  .battle-main { grid-template-columns: 1fr; }
+  .armies { grid-template-columns: 1fr; }
+}
+@media (max-width: 700px) {
+  :root { --cell: calc((100vw - 36px) / 16); }
+  .board-col { overflow: hidden; }
+  .title-buttons .btn { min-width: 0; width: 100%; }
+}

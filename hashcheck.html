@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PROMPT ARMY 決定論チェック</title>
+  <style>
+    body { font-family: sans-serif; margin: 24px; line-height: 1.7; }
+    code { background: #eee; padding: 2px 6px; }
+    .ok { color: #1a7f37; font-weight: 700; }
+    .ng { color: #c0392b; font-weight: 700; }
+  </style>
+</head>
+<body>
+  <h1>決定論チェック</h1>
+  <p>このブラウザで固定の合戦を3つ計算した記録のハッシュです。<code>node tools/hash.mjs</code> の出力と、すべての行が一致すれば合格です。</p>
+  <p id="ver"></p>
+  <pre id="out">計算中…</pre>
+  <p>Node.jsの値を貼り付けて照合：<br>
+    <textarea id="expect" rows="4" cols="30" placeholder="node tools/hash.mjs の出力（3行）"></textarea></p>
+  <p id="verdict"></p>
+  <script type="module">
+    import { selfTestHashes } from './js/engine/selftest.js';
+    import { ENGINE_VERSION } from './js/engine/version.js';
+    const hashes = selfTestHashes().map(String);
+    document.getElementById('ver').textContent = `engine ${ENGINE_VERSION}　／　${navigator.userAgent}`;
+    document.getElementById('out').textContent = hashes.join('\n');
+    const expect = document.getElementById('expect');
+    const verdict = document.getElementById('verdict');
+    expect.addEventListener('input', () => {
+      const want = expect.value.split(/\s+/).filter((s) => /^\d+$/.test(s));
+      if (want.length < 3) { verdict.textContent = ''; return; }
+      const ok = hashes.every((h, i) => h === want[i]);
+      verdict.textContent = ok ? '一致しました' : '一致しません';
+      verdict.className = ok ? 'ok' : 'ng';
+    });
+  </script>
+</body>
+</html>
